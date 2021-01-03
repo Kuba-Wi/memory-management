@@ -31,13 +31,9 @@ public:
 private:
     void deletePointers();
 
-    template <typename Y, typename... Args>
-    friend shared_ptr<Y> make_shared(Args&&... args);
-
     template <typename>
     friend class cs::weak_ptr;
 
-    shared_ptr(BlockAndData<T>* cb) : cb_(cb) { ptr_ = new T{cb->getObject()}; };
     T* ptr_;
     ControlBlock<T>* cb_;
 };
@@ -117,6 +113,6 @@ void shared_ptr<T>::reset(T* ptr) {
 
 template <typename Y, typename... Args>
 shared_ptr<Y> make_shared(Args&&... args) {
-    return cs::shared_ptr<Y>(new BlockAndData<Y>(std::forward<decltype(args)>(args)...));
+    return cs::shared_ptr<Y>(new Y(std::forward<decltype(args)>(args)...));
 }
 }  // namespace cs

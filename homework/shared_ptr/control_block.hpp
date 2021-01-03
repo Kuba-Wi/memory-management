@@ -23,14 +23,3 @@ private:
     std::atomic<size_t> weak_refs = 0;
     std::function<void(T*)> deleter;
 };
-
-template <typename T>
-class BlockAndData : public ControlBlock<T> {
-public:
-    template <typename... Args>
-    BlockAndData<T>(Args... args) : object_(args...), ControlBlock<T>() {}
-    const T& getObject() const { return object_; }
-
-private:
-    T object_;
-};
