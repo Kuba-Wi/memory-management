@@ -50,3 +50,9 @@ template<typename T>
 unique_ptr<T>::unique_ptr(unique_ptr&& ptr) : pointer_(ptr.pointer_) {
     ptr.pointer_ = nullptr;
 }
+
+template<typename T, typename ... Args>
+unique_ptr<T> make_unique(Args&& ... args) {
+    unique_ptr<T> ptr(new T(std::forward<decltype(args)>(args)...));
+    return ptr;
+}

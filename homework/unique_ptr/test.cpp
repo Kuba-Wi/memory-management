@@ -61,3 +61,12 @@ TEST(UniquePtrTest, ReleaseFunctionShouldSetNullptrAndReturnPointer) {
     ASSERT_TRUE(*ptr == 42);
     delete ptr;
 }
+
+TEST(UniquePtrTest, MakeUniqueFunctionShouldMakeAPointer) {
+    auto ptr = make_unique<int>(2);
+    ASSERT_EQ(*ptr, 2);
+    
+    auto ptr_to_pair = make_unique<std::pair<std::string, int>>("word", 42);
+    ASSERT_EQ(*ptr_to_pair, std::make_pair(std::string("word"), 42));
+}
+
