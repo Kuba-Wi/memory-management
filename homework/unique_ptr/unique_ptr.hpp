@@ -1,5 +1,6 @@
 #pragma once
 
+namespace cs {
 template<typename T>
 class unique_ptr {
 public:
@@ -56,3 +57,4 @@ unique_ptr<T> make_unique(Args&& ... args) {
     unique_ptr<T> ptr(new T(std::forward<decltype(args)>(args)...));
     return ptr;
 }
+} //namespace cs
